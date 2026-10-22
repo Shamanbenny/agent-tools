@@ -1,4 +1,0 @@
-interface:
-  display_name: "Document Repo"
-  short_description: "Update and prune repository documentation"
-  default_prompt: "Use $document-repo to review, update, and prune this repository documentation."

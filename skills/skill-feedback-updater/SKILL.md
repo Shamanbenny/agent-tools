@@ -8,9 +8,11 @@ Use this skill when a user gives feedback about how a skill behaved and the feed
 ## Required Workflow
 
 1. Identify the target skill. If multiple skills are plausible, ask which one.
-2. Ask for permission before editing any skill:
-   - `Yes (Recommended)` when the feedback is broadly reusable
-   - `No`
+   Use the CLI Agent's **Ask user** tool to resolve ambiguity.
+2. Before editing, use the CLI Agent's **Ask user** tool to request approval. Briefly explain what rule or wording you propose to change and why it would help future uses of the skill. Offer these choices:
+   - `Yes` to approve the proposed change
+   - `No` to decline it
+   Recommend `Yes` when the feedback is broadly reusable. Wait for the user's answer before editing.
 3. If approved, generalize the feedback into a rule that applies across similar tasks.
 4. Update the smallest correct location, preferring `SKILL.md`.
 5. Preserve existing behavior and avoid unrelated rewrites.

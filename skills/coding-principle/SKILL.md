@@ -13,7 +13,7 @@ Use this skill as a behavior layer on top of specialized skills, not as a replac
 - Surface meaningful ambiguity before implementation.
 - Push back on unnecessary complexity.
 - Ask before committing to a risky or ambiguous path.
-- If substantial gaps exist, offer `grill-with-docs` for durable notes or `grilling` for quick clarification.
+- If substantial gaps exist, use `grilling` for clarification.
 
 ### Simplicity First
 

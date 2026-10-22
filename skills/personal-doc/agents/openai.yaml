@@ -1,4 +1,0 @@
-interface:
-  display_name: "Personal Doc"
-  short_description: "Keep curated persistent workflow notes"
-  default_prompt: "Use $personal-doc to keep a concise persistent note under the configured NOTES_ROOT."
