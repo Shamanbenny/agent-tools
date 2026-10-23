@@ -1,0 +1,4 @@
+interface:
+  display_name: "Impeccable Usage"
+  short_description: "Set up Impeccable and choose design commands"
+  default_prompt: "Use $impeccable-usage to explain how to prepare this repository and choose the next design command."

@@ -6,6 +6,7 @@ This directory contains a Codex-friendly, curated extraction from [damusix/atomi
 
 ### Skills
 
+- `atomic-usage` - repo-agnostic setup, command selection, and Codex versus Claude Code guidance (authored here).
 - `atomic-debug` - diagnose unknown failures through testable hypotheses.
 - `atomic-git-discipline` - write concise commit and pull request text.
 - `atomic-review` - report focused, actionable review findings.
@@ -13,7 +14,13 @@ This directory contains a Codex-friendly, curated extraction from [damusix/atomi
 - `atomic-verify` - verify claims with fresh evidence.
 - `atomic-visual-options` - compare visual directions before implementation.
 
-The upstream `atomic-bus` skill assumes Claude Code session hooks, and the wiki, documentation, and writing skills are outside this curated pack.
+### Native commands and binary subcommands
+
+This is a curated extraction, not the full Atomic Claude distribution. Native slash-command implementations (including `/setup-wiki` and `/refresh-wiki`), wiki agents, hooks, output styles, and the binary are not vendored here. Earlier versions documented only a few of these in this README; that left a usage gap.
+
+The bundled [`atomic-usage` command map](skills/atomic-usage/references/commands.md) now accounts for the native slash-command catalog and all 24 CLI families in the checked version, including `atomic code`, `atomic wiki`, and `atomic signals`. It explains how repo and realm wiki workflows combine deterministic tools with agent inference, and which commands can write files, install integration, or commit work. Copying the usage skill carries this reference with it; it does not port native execution to Codex.
+
+The upstream `atomic-bus`, `atomic-wiki`, `atomic-documentation`, and `atomic-writing` skills remain outside the extracted executable guidance. Install the native bundle for their Claude Code behavior.
 
 ### Agent role prompts
 
@@ -21,19 +28,24 @@ The `agents/` directory contains six portable role prompts: auditor, deslopper, 
 
 ## Use with Codex CLI
 
-Install the skill directories into a Codex-discovered skill directory, then restart Codex:
+Install the individual skill directories into a Codex-discovered directory. Set the source checkout path explicitly so this works from any target repository. Existing copies are preserved:
 
 ```sh
-mkdir -p .agents/skills
-cp -R skills/atomic_claude/skills/* .agents/skills/
+agent_tools_root=/absolute/path/to/agent-tools
+destination="$PWD/.agents/skills"
+# Or: destination="$HOME/.agents/skills" for all projects.
+mkdir -p "$destination"
+for source in "$agent_tools_root"/skills/atomic_claude/skills/*; do
+  name=$(basename "$source")
+  if [ -e "$destination/$name" ] || [ -L "$destination/$name" ]; then
+    printf 'Skipped existing skill: %s\n' "$name"
+  else
+    cp -R "$source" "$destination/$name"
+  fi
+done
 ```
 
-Or make them available to all projects:
-
-```sh
-mkdir -p ~/.agents/skills
-cp -R skills/atomic_claude/skills/* ~/.agents/skills/
-```
+Restart or reload Codex. For setup questions, invoke `$atomic-usage` or ask naturally how to use Atomic Claude. Its [self-contained guide](skills/atomic-usage/SKILL.md) covers installation scope, repository instructions, graph queries, and native Claude Code onboarding without an upstream lookup. Compare existing copies before intentionally updating them.
 
 Invoke a skill with Codex syntax such as `$atomic-debug` or `$atomic-tdd`.
 
@@ -54,4 +66,4 @@ The native Atomic Claude commands such as `/setup-wiki` and `/refresh-wiki`, ses
 
 ## Provenance
 
-These files are adapted from the upstream Atomic Claude skills and agents. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the MIT notice and source paths. The project's native CLI documentation remains at [atomic.alonso.network](https://atomic.alonso.network/).
+The six workflow skills and six agent prompts are adapted from upstream Atomic Claude. `atomic-usage` is an original companion guide authored here; its CLI/version basis is recorded in the skill. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the MIT notice and source paths. The project's native CLI documentation remains at [atomic.alonso.network](https://atomic.alonso.network/).

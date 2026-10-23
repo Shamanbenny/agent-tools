@@ -1,6 +1,6 @@
 # Third-party notices
 
-The skill and agent material in this directory is adapted from [damusix/atomic-claude](https://github.com/damusix/atomic-claude), commit `b4ca195cae6022464b0cc5c07273b3fa9602da17`. Skill files under `skills/<name>/SKILL.md` map to upstream `context/skills/<name>/SKILL.md`; agent prompts under `agents/<name>.md` map to upstream `context/agents/<name>.md`. The Atomic Claude templates referenced by the agent prompts are expanded inline from upstream `context/_partials/` files.
+The skill and agent material in this directory is adapted from [damusix/atomic-claude](https://github.com/damusix/atomic-claude), commit `b4ca195cae6022464b0cc5c07273b3fa9602da17`. The original `skills/atomic-usage/` companion guide is excluded from that extraction and mapping. The six extracted workflow skill files under `skills/<name>/SKILL.md` map to upstream `context/skills/<name>/SKILL.md`; agent prompts under `agents/<name>.md` map to upstream `context/agents/<name>.md`. The Atomic Claude templates referenced by the agent prompts are expanded inline from upstream `context/_partials/` files.
 
 Copyright (c) 2026 Danilo Alonso
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atomic Claude Usage"
+  short_description: "Set up Atomic and choose the right workflow"
+  default_prompt: "Use $atomic-usage to explain the smallest useful Atomic setup for this repository."
