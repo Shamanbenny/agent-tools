@@ -12,7 +12,7 @@ description: >
 
 Answer ordinary usage and setup questions from this guide. Do not browse upstream
 to rediscover the command catalog. This companion is based on the installed
-Impeccable 4.7.0 skill; it does not bundle its launcher, playbooks, or detector.
+Impeccable 4.8.2 skill; it does not bundle its launcher, playbooks, or detector.
 Use installed skill metadata/references for version-specific behavior, and consult
 upstream only for a requested update or a gap local documentation cannot resolve.
 
@@ -22,11 +22,15 @@ upstream only for a requested update or a gap local documentation cannot resolve
 Do not claim the main skill is available just because this companion is present.
 
 To install the main tool, run `npx impeccable install`, select the coding agent,
-and choose project-only or user-wide scope. For project-only installation, start
-in the target repo; user-wide installation makes the skill available across
-projects but does not create product/design context for each repo. Reload the
-agent after installation. Use `npx impeccable update` only when updating is
-requested. Installation may require network access.
+and choose project-only or user-wide scope; it also offers the design hook where
+the agent supports one. The prompts can be skipped with flags, for example
+`npx impeccable install --providers=codex --scope=project|global --no-hooks`
+(`--providers` accepts a comma-separated list such as `claude,codex,cursor`).
+For project-only installation, start in the target repo; user-wide installation
+makes the skill available across projects but does not create product/design
+context for each repo. Reload the agent after installation. Use
+`npx impeccable update` only when updating is requested. Installation requires
+Node.js 18.19+ and network access.
 
 To install this companion from an agent-tools checkout, copy only its directory
 to a discovered skills directory, preserving any existing copy:
@@ -96,8 +100,9 @@ user's intent and current repo evidence; do not prescribe every command in order
 | Extract reusable design elements | `$impeccable extract <target>` |
 | Pursue ambitious visual effects | `$impeccable overdrive <surface>` |
 | Iterate in a live web app | `$impeccable live` |
-| Generate web variants of a named element | `$impeccable generate <n> <action> <element>` |
+| Generate web variants of a named element | `$impeccable generate [n] [action] [element]` (1 to 8 variants, default 3) |
 | Inspect/repair artifact drift | `$impeccable doctor` |
+| Add or remove a standalone command shortcut | `$impeccable pin <command>` / `$impeccable unpin <command>` |
 
 `teach` aliases `init`; `craft` is deprecated in favor of an ordinary new-work
 request. A bare `$impeccable` presents context-aware suggestions, not automatic
@@ -115,9 +120,21 @@ can proceed from incumbent evidence without forcing a full onboarding interview.
 
 Hooks are optional. `$impeccable hooks on` enables the project design detector;
 on Codex the user must review/trust it through `/hooks` the first time. Use
-`$impeccable hooks status` to inspect and `$impeccable hooks off` to disable.
-Load the main skill's `reference/hooks.md` for changes to detector exceptions;
-do not hand-edit hook plumbing or suppress real design issues as setup work.
+`$impeccable hooks status` to inspect and `$impeccable hooks off` to disable;
+`hooks reset` removes the config and every hook entry `on` installed. Detector
+exceptions use `hooks ignore-value`, `ignore-rule`, or `ignore-file`; load the
+main skill's `reference/hooks.md` first, and ask the user before `ignore-rule`
+or `ignore-file`. Do not hand-edit hook plumbing or suppress real design issues
+as setup work. The hook never blocks an edit on Codex or Claude Code; it reports
+after the edit. Older Cursor projects on the legacy `preToolUse` gate can block
+until `hooks on`, `impeccable update`, or `doctor --fix` migrates them.
+
+Security facts to state when asked about trust: the hook runs the detector
+engine unsandboxed with the agent's environment and network access, and the
+first edit can download the engine (checked against the skill's committed
+digests). Live Mode's Apply step, when no chat agent has polled in the last
+minute, can launch `codex` or `claude` with approvals and sandboxing off; set
+`IMPECCABLE_LIVE_COPY_AGENT=chat` to keep Apply in chat, or `off` to disable it.
 
 `$impeccable doctor` concerns artifact/schema drift, not updating the installed
 tool or redesigning a page. `init` updates product truth; `document` updates visual

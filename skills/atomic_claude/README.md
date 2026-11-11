@@ -59,7 +59,7 @@ The extracted skills can use Atomic's standalone CLI when installed. They do not
 atomic code index
 atomic code sync
 atomic code explore "where is request authentication handled?"
-atomic serve . --open
+atomic serve --open .
 ```
 
 The native Atomic Claude commands such as `/setup-wiki` and `/refresh-wiki`, session hooks, and `atomic claude install` install Claude Code integration. They are not Codex CLI setup commands.

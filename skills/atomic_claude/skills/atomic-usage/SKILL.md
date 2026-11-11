@@ -120,7 +120,7 @@ Run graph commands with cwd at the target repo:
 | Find a behavior | `atomic code explore "how are requests authenticated?"` |
 | Find symbol callers | `atomic code callers <symbol>` |
 | Check impact | `atomic code impact <symbol> --depth 2` |
-| Open local read-only viewer | `atomic serve . --open` |
+| Open local read-only viewer | `atomic serve --open .` |
 | Diagnose CLI installation | `atomic doctor` |
 | Update CLI (only when requested) | `atomic update` |
 

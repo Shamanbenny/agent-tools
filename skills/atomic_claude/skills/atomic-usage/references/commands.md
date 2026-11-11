@@ -133,7 +133,7 @@ shell syntax. Use the installed leaf command's help for arguments and flags.
 | `atomic docs` | `scan`, `stale`, `index` | Track documentation surfaces and refresh indexes |
 | `atomic repo` | `init` | Repo-local Atomic configuration scaffold |
 | `atomic where` | `--json` | Resolve current repo/realm/index and state paths |
-| `atomic serve` | viewer; `--open`, `--port`, `--host` | Browse existing wiki/graph locally; read-only, localhost by default |
+| `atomic serve` | viewer; `--open`, `--port`, `--host` before any path argument (flags after it are ignored) | Browse existing wiki/graph locally; read-only, localhost by default |
 | `atomic claude` | `install`, `update`, `list`, `diff`, `uninstall` | Manage native Claude artifacts |
 | `atomic hooks` | `session-start`, `install`, `uninstall` | Native session-start integration |
 | `atomic config` | `get`, `set`, `unset`, `list`, `path`, `agents`, `resolve` | Read/update settings and agent routing |
@@ -147,7 +147,7 @@ shell syntax. Use the installed leaf command's help for arguments and flags.
 | `atomic bus` | room/session messaging and gateway operations | Coordinate concurrent sessions; not required for single-agent work |
 | `atomic repl` | `start`, `eval`, `list`, `status`, `reset`, `stop` | Persistent named Python/Node interpreters |
 | `atomic retro` | `extract` | Extract session history for retrospective work |
-| `atomic reminder` | `add`, `list`, `show`, `rm` | Maintain reminder records; scheduling depends on runtime |
+| `atomic reminder` | `add`, `list`, `show`, `rm`, `set-due` | Maintain reminder records; scheduling depends on runtime |
 | `atomic followups` | `list`, `add`, `close`, `render`, `path` | Maintain typed project follow-ups |
 | `atomic profile` | `refresh` | Refresh recorded user environment |
 | `atomic docker` | `init` | Scaffold an evaluation environment |
@@ -170,7 +170,7 @@ failure. Check leaf help because status contracts differ.
 | Rebuild a repo's knowledge pages | `/refresh-wiki`; scan + wiki agents + linkification |
 | Map a folder of related repos | Realm setup/refresh using `atomic wiki` plus wiki agents |
 | Investigate callers and blast radius | `atomic code index` once, `sync` after edits, then queries |
-| Browse knowledge | `atomic serve . --open` after artifacts exist |
+| Browse knowledge | `atomic serve --open .` after artifacts exist |
 | Track durable architecture decisions | Existing project docs, optionally `docs/design/` and `docs/spec/` |
 | Locate transient reports and archives | `atomic where --json`; do not construct home-state paths |
 
